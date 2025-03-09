@@ -1,0 +1,11 @@
+論理名	物理名	型	
+id	id	integer	
+ユーザー	userid	string	
+日付	when	date	
+思ったこと	thought	string	
+何をしていてそう思ったか	what	string	
+何故そう思ったか	why	string	
+感情	emotion	string	配列
+参考画像	image	img	
+作成日	create_date	date	
+変更日	change_date	date	

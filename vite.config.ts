@@ -12,5 +12,11 @@ export default defineConfig({
   },
   server: {
     host: true,
+    proxy: {
+      '/api': {
+        target: 'https://tsuzuriback.dayes3010.workers.dev',
+        changeOrigin: true,
+      },
+    },
   }
 })
