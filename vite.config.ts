@@ -12,6 +12,7 @@ export default defineConfig({
   },
   server: {
     host: true,
+    port:5174,
     proxy: {
       '/api': {
         target: 'https://tsuzuriback.dayes3010.workers.dev',
