@@ -1,7 +1,7 @@
 <template>
   <nav>
     <button @click="navigateTo('Calendar')">カレンダー</button>
-    <button @click="navigateTo('Register')">登録</button>
+    <button @click="navigateTo('Detail')">登録</button>
     <button @click="navigateTo('List')">一覧</button>
   </nav>
 </template>

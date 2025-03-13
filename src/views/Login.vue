@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
-import config from '@/config.ts'
+import config from '@/utils/config'
 
 import CommonBtn1 from '@/components/CommonBtn1.vue';
 
@@ -42,6 +42,7 @@ const login = async () => {
     // const token = response.data.token;
     // localStorage.setItem('token', token);
     console.log('Login success:', response.data);
+    localStorage.setItem('userid', userid.value); 
     // 一覧画面へ
     router.push('/list');
   } catch (error) {
@@ -70,7 +71,9 @@ const register = async () => {
   if (confirmPassword === password.value) {
     try {
       const response = await axios.post(config.apiUrl + '/api/register', { userid: userid.value, password: password.value });
+      //登録成功
       console.log('register success:', response.data);
+      localStorage.setItem('userid', userid.value); 
       router.push('/list');
     } catch (error) {
       console.error('Login failed:', error);
