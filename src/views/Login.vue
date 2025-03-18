@@ -6,6 +6,9 @@ import config from '@/utils/config'
 
 import CommonBtn1 from '@/components/CommonBtn1.vue';
 
+import { useTsuzuriStore } from '@/stores/tsuzuri';
+const tsuzuriStore = useTsuzuriStore();
+
 const userid = ref('');
 const password = ref('');
 const showUserIdPlaceholder = ref(true);
@@ -42,7 +45,8 @@ const login = async () => {
     // const token = response.data.token;
     // localStorage.setItem('token', token);
     console.log('Login success:', response.data);
-    localStorage.setItem('userid', userid.value); 
+    // localStorage.setItem('userid', userid.value);
+    tsuzuriStore.setUser(userid.value)
     // 一覧画面へ
     router.push('/list');
   } catch (error) {
@@ -73,7 +77,8 @@ const register = async () => {
       const response = await axios.post(config.apiUrl + '/api/register', { userid: userid.value, password: password.value });
       //登録成功
       console.log('register success:', response.data);
-      localStorage.setItem('userid', userid.value); 
+      // localStorage.setItem('userid', userid.value);
+      tsuzuriStore.setUser(userid.value)
       router.push('/list');
     } catch (error) {
       console.error('Login failed:', error);
@@ -175,7 +180,7 @@ input:not(:placeholder-shown)+label {
 }
 
 .registerBtn {
-  margin-top:16px;
-  margin-bottom:32px;
+  margin-top: 16px;
+  margin-bottom: 32px;
 }
 </style>

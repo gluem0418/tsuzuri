@@ -10,32 +10,54 @@ export interface TsuzuriData {
     what: string;
     how: string;
     why: string;
-    // emotion: number[];
     emotion: string;
-    create_date: string;
-    change_date: string;
+    update_date: string;
+}
+
+export interface CreateData {
+    userid: string;
+    tdate: string;
+    what: string;
+    how: string;
+    why: string;
+    emotion: string;
 }
 
 export const useTsuzuriStore = defineStore('tsuzuri', {
     state: () => ({
-        tsuzuriList: [] as TsuzuriData[],
+        userid: undefined as string | undefined,
+        tsuzuriList: [] as TsuzuriData[]
     }),
     actions: {
-        async fetchTsuzuri(userid: string) { // ユーザー ID を引数に追加
+        setUser(userid: string) {
+            this.userid = userid;
+        },
+        async fetchTsuzuri() {
             try {
-                const response = await axios.get(config.apiUrl + `/api/list/${userid}`); // ユーザー ID を URL に含める
+                // const response = await axios.get(config.apiUrl + `/api/list/${userid}`); // ユーザー ID を URL に含める
+                const response = await axios.get(config.apiUrl + `/api/list/${this.userid}`); // ユーザー ID を URL に含める
                 this.tsuzuriList = response.data.tsuzuri;
+                console.log('tsuzuriList', this.tsuzuriList)
             } catch (error) {
                 console.error('Failed to fetch tsuzuri data:', error);
             }
         },
-        addTsuzuri(tsuzuri: TsuzuriData) {
-            this.tsuzuriList.push(tsuzuri);
+        async createTsuzuri(tsuzuri: CreateData) {
+            try {
+                console.log('createTsuzuri', tsuzuri)
+                await axios.post(`${config.apiUrl}/api/tsuzuri`, tsuzuri);
+                console.log('tsuzuri を登録しました。');
+            } catch (error) {
+                console.error('tsuzuri の登録に失敗しました。', error);
+            }
         },
-        updateTsuzuri(updatedTsuzuri: TsuzuriData) {
-            const index = this.tsuzuriList.findIndex((tsuzuri) => tsuzuri.id === updatedTsuzuri.id);
-            if (index !== -1) {
-                this.tsuzuriList.splice(index, 1, updatedTsuzuri);
+        async updateTsuzuri(tsuzuri: CreateData, id: number) {
+            try {
+                console.log('updateTsuzuri', tsuzuri, id)
+                await axios.put(`${config.apiUrl}/api/tsuzuri/${id}`, tsuzuri);
+                console.log('tsuzuri を更新しました。');
+            } catch (error) {
+                console.error('tsuzuri の更新に失敗しました。', error);
             }
         },
         deleteTsuzuri(id: number) {

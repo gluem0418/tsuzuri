@@ -25,9 +25,9 @@ const getDayClass = (date: Date) => {
 </script>
 
 <template>
-  <!-- <VueDatePicker v-model="date" format="yyyy/MM/dd" locale="ja" week-start="0" :enable-time-picker="false" inline
-    auto-apply :day-class="getDayClass" /> -->
-  <VueDatePicker v-model="date" format="yyyy/MM/dd" locale="ja" week-start="0" :day-class="getDayClass" />
+  <VueDatePicker v-model="date" format="yyyy/MM/dd" locale="ja" week-start="0" :enable-time-picker="false" inline
+    auto-apply :day-class="getDayClass" />
+  <!-- <VueDatePicker v-model="date" format="yyyy/MM/dd" locale="ja" week-start="0" :day-class="getDayClass" /> -->
   <BottomNav />
 </template>
 

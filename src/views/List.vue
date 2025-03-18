@@ -1,26 +1,7 @@
-<script lang="ts" setup>
-import { onMounted } from 'vue';
-import BottomNav from '@/components/BottomNav.vue';
-import { useTsuzuriStore } from '@/stores/tsuzuri';
-import { getEmotionName, type EmotionId } from '@/utils/emotions';
-
-const tsuzuriStore = useTsuzuriStore();
-
-onMounted(() => {
-  const userid = localStorage.getItem('userid');
-  tsuzuriStore.fetchTsuzuri(userid!);
-  console.log('tsuzuriList', tsuzuriStore.tsuzuriList)
-});
-
-const parsedEmotions = (emotions: string): EmotionId[] => {
-  return JSON.parse(emotions) as EmotionId[];
-};
-</script>
-
 <template>
   <div>
     <ul>
-      <li v-for="item in tsuzuriStore.tsuzuriList" :key="item.id">
+      <li v-for="item in tsuzuriStore.tsuzuriList" :key="item.id"  @click="editTsuzuri(item.id)">
         {{ item.tdate }}
         {{ item.what }}
         {{ item.how }}
@@ -33,3 +14,29 @@ const parsedEmotions = (emotions: string): EmotionId[] => {
   </div>
   <BottomNav />
 </template>
+
+<script lang="ts" setup>
+import { onMounted } from 'vue';
+import BottomNav from '@/components/BottomNav.vue';
+import { getEmotionName, type EmotionId } from '@/utils/emotions';
+
+import { useTsuzuriStore } from '@/stores/tsuzuri';
+const tsuzuriStore = useTsuzuriStore();
+
+import { useRouter } from 'vue-router';
+const router = useRouter();
+
+onMounted(() => {
+  tsuzuriStore.fetchTsuzuri();
+  console.log('tsuzuriList', tsuzuriStore.tsuzuriList)
+});
+
+const parsedEmotions = (emotions: string): EmotionId[] => {
+  return JSON.parse(emotions) as EmotionId[];
+};
+
+const editTsuzuri = (id: number) => {
+  router.push(`/detail/${id}`);
+};
+
+</script>
