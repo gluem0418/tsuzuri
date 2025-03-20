@@ -2,6 +2,12 @@
   font-family: "MPLUSRounded1c-Regular";
   src: url("@/assets/font/MPLUSRounded1c-Regular.ttf") format("truetype");
 }
+
+@font-face {
+  font-family: "MPLUSRounded1c-Medium";
+  src: url("@/assets/font/MPLUSRounded1c-Medium.ttf") format("truetype");
+}
+
 @font-face {
   font-family: "ShipporiMincho-Medium";
   src: url("@/assets/font/ShipporiMincho-Medium.ttf") format("truetype");
@@ -31,8 +37,10 @@ a:hover {
 
 body {
   margin: 0;
-  padding:8px;
   font-family: "MPLUSRounded1c-Regular";
+  font-size: 16px;
+  line-height: 1.8;
+  color: #1C2121;
   background-image: url("@/assets/img/back.png");
   background-attachment: fixed;
   background-size: cover;
@@ -42,7 +50,7 @@ h1 {
   font-family: "ShipporiMincho-Bold";
   font-size: 64px;
   text-shadow: 4px 4px 8px #F4BAAA;
-  text-align:center;
+  text-align: center;
   margin: 32px auto;
 }
 
@@ -57,6 +65,15 @@ button {
 
 input {
   font-family: "MPLUSRounded1c-Regular";
-  font-size:16px;
+  font-size: 16px;
   text-indent: 8px;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
 }

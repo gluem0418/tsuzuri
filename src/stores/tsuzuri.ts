@@ -3,6 +3,8 @@ import { defineStore } from 'pinia';
 import axios from 'axios';
 import config from '@/utils/config';
 
+import tsuzuriJson from '@/assets/json/tsuzuri.json';
+
 export interface TsuzuriData {
     id: number;
     userid: string;
@@ -34,9 +36,10 @@ export const useTsuzuriStore = defineStore('tsuzuri', {
         },
         async fetchTsuzuri() {
             try {
-                // const response = await axios.get(config.apiUrl + `/api/list/${userid}`); // ユーザー ID を URL に含める
-                const response = await axios.get(config.apiUrl + `/api/list/${this.userid}`); // ユーザー ID を URL に含める
-                this.tsuzuriList = response.data.tsuzuri;
+                // const response = await axios.get(config.apiUrl + `/api/list/${this.userid}`); // ユーザー ID を URL に含める
+                // this.tsuzuriList = response.data.tsuzuri;
+                //ローカルjson入力
+                this.tsuzuriList = tsuzuriJson;
                 console.log('tsuzuriList', this.tsuzuriList)
             } catch (error) {
                 console.error('Failed to fetch tsuzuri data:', error);

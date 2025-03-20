@@ -39,13 +39,12 @@ const showPlaceholder = (input: string) => {
 const login = async () => {
   try {
     ////////////////////////////////////////////////////
-    // バックエンドで記録したデータを取得するように変更
-    /////////////////////////////////////////////////
-    const response = await axios.post(config.apiUrl + '/api/login', { userid: userid.value, password: password.value });
+    // ローカル実行用にコメントアウト
+    // const response = await axios.post(config.apiUrl + '/api/login', { userid: userid.value, password: password.value });
+    // console.log('Login success:', response.data);
+    ////////////////////////////////////////
     // const token = response.data.token;
     // localStorage.setItem('token', token);
-    console.log('Login success:', response.data);
-    // localStorage.setItem('userid', userid.value);
     tsuzuriStore.setUser(userid.value)
     // 一覧画面へ
     router.push('/list');
