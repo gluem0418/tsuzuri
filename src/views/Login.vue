@@ -39,9 +39,8 @@ const showPlaceholder = (input: string) => {
 const login = async () => {
   try {
     ////////////////////////////////////////////////////
-    // ローカル実行用にコメントアウト
-    // const response = await axios.post(config.apiUrl + '/api/login', { userid: userid.value, password: password.value });
-    // console.log('Login success:', response.data);
+    const response = await axios.post(config.apiUrl + '/api/login', { userid: userid.value, password: password.value });
+    console.log('Login success:', response.data);
     ////////////////////////////////////////
     // const token = response.data.token;
     // localStorage.setItem('token', token);

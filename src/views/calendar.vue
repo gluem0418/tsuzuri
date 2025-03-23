@@ -1,8 +1,10 @@
 <template>
-  <CommonHeader :inside="'綴る'" />
-  <VueDatePicker v-model="date" format="yyyy/MM/dd" locale="ja" week-start="0" :enable-time-picker="false" inline
-    auto-apply :day-class="getDayClass" />
-  <!-- <VueDatePicker v-model="date" format="yyyy/MM/dd" locale="ja" week-start="0" :day-class="getDayClass" /> -->
+  <CommonHeader :inside="'綴りカレンダー'" />
+  <div class="calendar">
+    <VueDatePicker v-model="date" format="yyyy-MM-dd" locale="ja" week-start="0" :enable-time-picker="false" inline
+      auto-apply :day-class="getDayClass" />
+    <!-- <VueDatePicker v-model="date" format="yyyy/MM/dd" locale="ja" week-start="0" :day-class="getDayClass" /> -->
+  </div>
   <BottomNav />
 </template>
 
@@ -32,6 +34,13 @@ const getDayClass = (date: Date) => {
 };
 
 </script>
+
+<style scoped>
+.calendar {
+  margin-top:48px;
+  padding: 20px;
+}
+</style>
 
 <style>
 /* scopedの中には書かない */

@@ -1,6 +1,6 @@
 <template>
+  <CommonHeader :inside="'綴りノート'" />
   <div class="tsuzuriNote">
-    <CommonHeader :inside="'綴りノート'" />
     <ul>
       <li class="tsuzuri-item" v-for="item in tsuzuriStore.tsuzuriList" :key="item.id">
         <div class="tsuzuri-header">
@@ -56,6 +56,8 @@ const editTsuzuri = (id: number) => {
 <style scoped>
 .tsuzuriNote {
   background: #FFF2F2;
+  margin-top: 48px;
+  margin-bottom: 64px;
 }
 
 .tsuzuri-item {
@@ -81,6 +83,10 @@ const editTsuzuri = (id: number) => {
 .tsuzuri-emotion {
   display: flex;
   justify-content: space-between;
-  margin-top: 8px;
+  /* margin-top: 8px; */
+}
+
+.icon {
+  margin-top: 10px;
 }
 </style>

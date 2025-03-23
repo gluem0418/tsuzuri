@@ -20,12 +20,14 @@ const props = defineProps({
 
 <style scoped>
 button {
-  width: 100%;
-  height: 48px;
-  font-size: 20px;
-  background: linear-gradient(to right, #37E8F2, #8F42F3);
+  /* width: 224px; */
+  display: inline-block;
+  padding: 0 24px;
+  height: 40px;
+  font-size: 16px;
+  background: #37E8F2;
   border-radius: 16px;
-  color: #FFF2F2;
+  color: #1C2121;
   box-shadow: 0px 4px 4px #1C212150;
 }
 </style>

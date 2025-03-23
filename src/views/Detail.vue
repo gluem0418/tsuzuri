@@ -1,67 +1,69 @@
 <template>
   <CommonHeader :inside="'綴る'" />
   <div class="detail">
+    <BackBtn class="backBtn" @click="goBack" />
     <div v-if="isViewMode">
-      <div>
-        <label>日付:</label>
-        <span>{{ tsuzuri.tdate }}</span>
+      <label>◎ いつの出来事ですか？</label>
+      <div class="itemView">{{ tsuzuri.tdate }}</div>
+      <label>◎ 何を思いましたか？</label>
+      <div class="itemView">{{ tsuzuri.what }}</div>
+      <label>◎ 何をしていてそう思いましたか？</label>
+      <div class="itemView">{{ tsuzuri.how }}</div>
+      <label>◎ 何故そのように思ったのでしょうか？</label>
+      <div class="itemView">{{ tsuzuri.why }}</div>
+      <label>◎ そのときはどんな気持ちでしたか？</label>
+      <div class="itemView" v-if="selectedEmotionNames.length > 0">
+        <span v-for="emotion in selectedEmotionNames">
+          <EmotionTag :inside="emotion" />
+        </span>
       </div>
-      <div>
-        <label>何があった？:</label>
-        <span>{{ tsuzuri.what }}</span>
+      <div class='changeBtn'>
+        <CommonBtn2 :btnType="'button'"  @click="enableEditMode">変更</CommonBtn2>
       </div>
-      <div>
-        <label>どのように？:</label>
-        <span>{{ tsuzuri.how }}</span>
-      </div>
-      <div>
-        <label>なぜ？:</label>
-        <span>{{ tsuzuri.why }}</span>
-      </div>
-      <div>
-        <label>感情:</label>
-        <span>{{ selectedEmotionNames.join(', ') }}</span>
-      </div>
-      <button @click="enableEditMode">変更</button>
     </div>
     <form v-else @submit.prevent="saveTsuzuri">
       <div class="itemSec">
-        <label for="tdate">◎いつの出来事ですか？</label>
+        <label for="tdate">◎ いつの出来事ですか？</label>
         <RequiredTag />
         <input type="date" id="tdate" v-model="tsuzuri.tdate" required />
       </div>
       <div class="itemSec">
-        <label for="what">◎何を思いましたか？</label>
+        <label for="what">◎ 何を思いましたか？</label>
         <RequiredTag />
         <div class="example">例：楽しかったけど、少し寂しくなった</div>
         <textarea id="what" v-model="tsuzuri.what" required></textarea>
       </div>
       <div class="itemSec">
-        <label for="how">◎何をしていてそう思いましたか？</label>
+        <label for="how">◎ 何をしていてそう思いましたか？</label>
         <div class="example">例：テレビドラマの最終回を観ていたとき</div>
         <textarea id="how" v-model="tsuzuri.how"></textarea>
       </div>
       <div class="itemSec">
-        <label for="why">◎何故そのように思ったのでしょうか？</label>
+        <label for="why">◎ 何故そのように思ったのでしょうか？</label>
         <div class="example">例：楽しみにしていたものが終わってしまうから</div>
         <textarea id="why" v-model="tsuzuri.why"></textarea>
       </div>
       <div class="emotionSec">
-        <label>◎そのときはどんな気持ちでしたか？</label>
+        <label>◎ そのときはどんな気持ちでしたか？</label>
         <RequiredTag />
-        <div v-if="selectedEmotionNames.length > 0">
-          {{ selectedEmotionNames.join(', ') }}
+        <div class="emotion" v-if="selectedEmotionNames.length > 0">
+          <span v-for="emotion in selectedEmotionNames">
+            <EmotionTag :inside="emotion" />
+          </span>
         </div>
         <div class='selectBtn'>
-          <CommonBtn2 :btnType="'button'" @click="openEmotionModal">感情を選択（複数可）</CommonBtn2>
+          <CommonBtn3 :btnType="'button'" @click="openEmotionModal">感情を選択（複数可）</CommonBtn3>
         </div>
       </div>
-      <button type="submit">{{ isEditMode ? '更新' : '登録' }}</button>
+      <div class='submitBtn'>
+        <CommonBtn2 :btnType="'submit'">{{ isEditMode ? '更新' : '登録' }}</CommonBtn2>
+      </div>
+
     </form>
     <EmotionModal :key="tsuzuri.emotion" :show="showEmotionModal" @close="closeEmotionModal" @select="selectEmotions"
       :selectedEmotions="emotionIds" />
+
   </div>
-  <BackBtn class="backBtn"/>
   <BottomNav />
 </template>
 
@@ -69,8 +71,10 @@
 import { ref, computed, onMounted } from 'vue';
 import BottomNav from '@/components/BottomNav.vue';
 import CommonHeader from '@/components/CommonHeader.vue';
+import EmotionTag from '@/components/EmotionTag.vue';
 import RequiredTag from '@/components/RequiredTag.vue';
 import CommonBtn2 from '@/components/CommonBtn2.vue'
+import CommonBtn3 from '@/components/CommonBtn3.vue'
 import BackBtn from '@/components/BackBtn.vue'
 
 import { useTsuzuriStore } from '@/stores/tsuzuri';
@@ -154,10 +158,17 @@ const selectedEmotionNames = computed(() => {
 const enableEditMode = () => {
   isViewMode.value = false;
 };
+
+const goBack = () => {
+  router.push('/list');
+}
+
 </script>
 
 <style scoped>
 .detail {
+  margin-top:48px;
+  margin-bottom: 64px;
   padding: 16px;
   background: #FFF2F2;
 }
@@ -191,20 +202,43 @@ textarea {
 }
 
 .emotionSec {
-  background: #B9EDF0;
+  background: #FFFEF2;
   border-radius: 4px;
   padding: 8px 12px;
   margin-bottom: 24px;
 }
 
+.emotion {
+  margin-top: 8px;
+}
+
 .selectBtn {
-  margin: 12px auto;
+  margin: 16px auto;
   text-align: center;
 }
 
 .backBtn {
-  position: sticky;
-  left:16px;
-  bottom:16px;
+  /* position: sticky; */
+  position: fixed;
+  left: 16px;
+  bottom: 80px;
+}
+
+.submitBtn {
+  margin: 0 auto;
+  text-align: center;
+  width: 70%;
+}
+
+.changeBtn {
+  margin: 24px auto 8px;
+  /* margin-top:32px; */
+  text-align: center;
+  width: 70%;
+}
+
+.itemView {
+  margin-left: 20px;
+  margin-bottom: 16px
 }
 </style>

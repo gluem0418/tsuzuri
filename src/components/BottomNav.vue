@@ -3,10 +3,6 @@
     <img class="calendar" :src="imgCalendar" alt="calendar" @click="navigateTo('Calendar')">
     <img class="write" :src="imgWrite" alt="write" @click="navigateTo('Create')">
     <img class="note" :src="imgNote" alt="note" @click="navigateTo('List')">
-
-    <!-- <button @click="navigateTo('Calendar')">カレンダー</button>
-    <button @click="navigateTo('Create')">登録</button>
-    <button @click="navigateTo('List')">一覧</button> -->
   </nav>
 </template>
 
@@ -33,7 +29,7 @@ nav {
   /* height: 64px; */
   display: flex;
   justify-content: space-around;
-  background-color: #B9EDF0;
+  background-color: #BAFCFF;
   padding: 8px 0;
 }
 

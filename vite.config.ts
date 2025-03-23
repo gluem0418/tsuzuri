@@ -5,6 +5,13 @@ import * as path from 'path';
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [vue()],
+  // plugins: [
+  //   vue({
+  //     script: {
+  //       propsDestructure: true,
+  //     }
+  //   })
+  // ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
@@ -13,7 +20,7 @@ export default defineConfig({
   define: { 'process.env': {} },
   server: {
     host: true,
-    port: 5174,
+    // port: 5174,
     proxy: {
       '/api': {
         target: 'https://tsuzuriback.dayes3010.workers.dev',
