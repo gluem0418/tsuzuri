@@ -1,5 +1,5 @@
 <template>
-  <CommonHeader :inside="'綴りノート'" />
+  <CommonHeader class= 'header' :inside="'綴りノート'" />
   <div class="tsuzuriNote">
     <ul>
       <li class="tsuzuri-item" v-for="item in tsuzuriStore.tsuzuriList" :key="item.id">
@@ -54,6 +54,11 @@ const editTsuzuri = (id: number) => {
 </script>
 
 <style scoped>
+.header {
+  position: fixed;
+  inset:0;
+}
+
 .tsuzuriNote {
   background: #FFF2F2;
   margin-top: 48px;
@@ -77,8 +82,6 @@ const editTsuzuri = (id: number) => {
   font-family: "MPLUSRounded1c-Medium";
   font-size: 20px;
 }
-
-.date {}
 
 .tsuzuri-emotion {
   display: flex;

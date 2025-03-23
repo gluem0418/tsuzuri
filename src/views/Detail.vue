@@ -1,5 +1,5 @@
 <template>
-  <CommonHeader :inside="'綴る'" />
+  <CommonHeader class='header' :inside="'綴る'" />
   <div class="detail">
     <BackBtn class="backBtn" @click="goBack" />
     <div v-if="isViewMode">
@@ -166,6 +166,11 @@ const goBack = () => {
 </script>
 
 <style scoped>
+.header {
+  position: fixed;
+  inset:0;
+}
+
 .detail {
   margin-top:48px;
   margin-bottom: 64px;

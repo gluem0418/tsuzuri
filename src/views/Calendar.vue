@@ -1,5 +1,5 @@
 <template>
-  <CommonHeader :inside="'綴りカレンダー'" />
+  <CommonHeader class='header' :inside="'綴りカレンダー'" />
   <div class="calendar">
     <VueDatePicker v-model="date" format="yyyy-MM-dd" locale="ja" week-start="0" :enable-time-picker="false" inline
       auto-apply :day-class="getDayClass" />
@@ -36,6 +36,10 @@ const getDayClass = (date: Date) => {
 </script>
 
 <style scoped>
+.header {
+  position: fixed;
+  inset:0;
+}
 .calendar {
   margin-top:48px;
   padding: 20px;

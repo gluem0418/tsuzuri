@@ -1,7 +1,5 @@
 <template>
-  <div class="header">
-    <h2>{{ inside }}</h2>
-  </div>
+  <h2>{{ inside }}</h2>
 </template>
 
 <script lang="ts" setup>
@@ -14,11 +12,6 @@ const props = defineProps({
 </script>
 
 <style scoped>
-
-.header {
-  position: fixed;
-  inset:0;
-}
 h2 {
   margin: 0;
   width: 100%;
