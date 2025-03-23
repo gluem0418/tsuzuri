@@ -2,7 +2,7 @@
   <CommonHeader class= 'header' :inside="'綴りノート'" />
   <div class="tsuzuriNote">
     <ul>
-      <li class="tsuzuri-item" v-for="item in tsuzuriStore.tsuzuriList" :key="item.id">
+      <li class="tsuzuri-item" v-for="item in sortedTsuzuriList" :key="item.id">
         <div class="tsuzuri-header">
           <span class="title">{{ item.what }}</span>
           <span class="date">{{ item.tdate }}</span>
@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted } from 'vue';
+import { onMounted, computed } from 'vue';
 import CommonHeader from '@/components/CommonHeader.vue';
 import BottomNav from '@/components/BottomNav.vue';
 import EmotionTag from '@/components/EmotionTag.vue';
@@ -41,6 +41,12 @@ const router = useRouter();
 onMounted(() => {
   tsuzuriStore.fetchTsuzuri();
   console.log('tsuzuriList', tsuzuriStore.tsuzuriList)
+});
+
+const sortedTsuzuriList = computed(() => {
+  return [...tsuzuriStore.tsuzuriList].sort((a, b) => {
+    return b.tdate.localeCompare(a.tdate);
+  });
 });
 
 const parsedEmotions = (emotions: string): EmotionId[] => {
